@@ -34,43 +34,42 @@ php artisan make:migration alter_fornecedores_table
 Nos arquivos gerados em `database/migrations/`, adicione os campos desejados:
 
 ```php
-// create_fornecedores_table
 public function up(): void
-{
-    Schema::create('cadastro', function (Blueprint $table) {
-        $table->id();
-        $table->string('nome');
-        $table->string('endereco');
-        $table->string('telefone');
-        $table->string('cnpj')->unique();
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('cadastro', function (Blueprint $table) {
+                $table->id();
+                $table->string('nome');
+                $table->string('endereco');
+                $table->string('telefone');
+                $table->string('cnpj')->unique();
+                $table->timestamps();
+            });
+    }
 ```
 
 ```php
 // create_estoque_table
 public function up(): void
-{
-    Schema::create('estoque', function (Blueprint $table) {
-        $table->id();
-        $table->integer('quantidade');
-        $table->double('valor_unitario');
-        $table->foreignId('cadastro_id')->constrained('cadastro')->onDelete('cascade');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('estoque', function (Blueprint $table) {
+                $table->id();
+                $table->integer('quantidade');
+                $table->double('valor_unitario');
+                $table->foreignId('cadastro_id')->constrained('cadastro')->onDelete('cascade');
+                $table->timestamps();
+            });
+    }
 ```
 
 ```php
 // alter_fornecedores_table
 public function up(): void
-{
-    Schema::table('cadastro', function (Blueprint $table) {
-        $table->string('razao_social')->unique();
-        $table->string('nome_fantasia')->unique();
-    });
-}
+    {
+        Schema::table('cadastro', function (Blueprint $table) {
+                $table->string('razao_social')->unique();
+                $table->string('nome_fantasia')->unique();
+            });
+    }
 ```
 
 ### 4️⃣ Rodando as migrations
